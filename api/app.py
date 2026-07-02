@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from pathlib import Path
 from schemas import ProductInput
 import joblib
 import pandas as pd
@@ -8,9 +9,13 @@ app = FastAPI(
     version="1.0"
 )
 
-# Load model
-model = joblib.load("../ML/model.pkl")
-encoder = joblib.load("../ML/label_encoder.pkl")
+# -----------------------------
+# Load ML Model
+# -----------------------------
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+model = joblib.load(BASE_DIR / "ML" / "model.pkl")
+encoder = joblib.load(BASE_DIR / "ML" / "label_encoder.pkl")
 
 
 @app.get("/")
@@ -35,8 +40,9 @@ def predict(product: ProductInput):
     probability = model.predict_proba(data)
 
     risk = encoder.inverse_transform(prediction)[0]
+    confidence = float(probability.max() * 100)
 
     return {
         "RiskLevel": risk,
-        "Confidence": round(probability.max() * 100, 2)
+        "Confidence": round(confidence, 2)
     }
