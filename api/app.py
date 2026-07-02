@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pathlib import Path
-from schemas import ProductInput
+from api.schemas import ProductInput
 import joblib
 import pandas as pd
 
