@@ -3,19 +3,14 @@ import sqlite3
 import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 DB_PATH = BASE_DIR / "database" / "darkpattern.db"
 
 conn = sqlite3.connect(DB_PATH)
 
-query = """
-SELECT *
-FROM amazon_products
-LIMIT 5;
-"""
-
-df = pd.read_sql(query, conn)
-
-print(df)
+try:
+    df = pd.read_sql("SELECT * FROM predictions ORDER BY id DESC LIMIT 10", conn)
+    print(df)
+except Exception as e:
+    print(e)
 
 conn.close()

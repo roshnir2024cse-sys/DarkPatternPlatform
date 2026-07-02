@@ -1,13 +1,21 @@
+from pathlib import Path
 import sqlite3
 import pandas as pd
 
-# Load final dataset
-df = pd.read_csv("../dataset/final_output.csv")
+# Project root folder
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Create SQLite database
-conn = sqlite3.connect("darkpattern.db")
+# File paths
+csv_path = BASE_DIR / "dataset" / "final_output.csv"
+db_path = BASE_DIR / "database" / "darkpattern.db"
 
-# Store data in database
+# Read CSV
+df = pd.read_csv(csv_path)
+
+# Connect SQLite
+conn = sqlite3.connect(db_path)
+
+# Save CSV to SQLite
 df.to_sql(
     "amazon_products",
     conn,
