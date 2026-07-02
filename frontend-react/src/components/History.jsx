@@ -12,20 +12,14 @@ const History = () => {
   }, []);
 
   const fetchHistory = async () => {
-
-    try {
-
-      const res = await API.get("/history");
-
-      setHistory(res.data);
-
-    } catch (err) {
-
-      console.log(err);
-
-    }
-
-  };
+  try {
+   const res = await API.get("/history");
+   console.log(res.data);
+   setHistory(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
   return (
 
