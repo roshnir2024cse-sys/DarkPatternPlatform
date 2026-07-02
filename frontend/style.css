@@ -1,0 +1,779 @@
+/* ==========================================
+   GOOGLE FONT & RESET
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    color:white;
+
+    background:#030712;
+
+}
+
+/* ==========================================
+   ANIMATED BACKGROUND
+========================================== */
+
+.background{
+
+    position:fixed;
+
+    width:100%;
+    height:100%;
+
+    inset:0;
+
+    overflow:hidden;
+
+    z-index:-10;
+
+    background:
+    linear-gradient(135deg,#050816,#111827,#1e1b4b);
+
+}
+
+.circle{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(120px);
+
+    animation:float 12s ease-in-out infinite alternate;
+
+}
+
+.one{
+
+    width:400px;
+    height:400px;
+
+    background:#4f46e5;
+
+    top:-120px;
+    left:-120px;
+
+}
+
+.two{
+
+    width:300px;
+    height:300px;
+
+    background:#ec4899;
+
+    right:-100px;
+    top:120px;
+
+}
+
+.three{
+
+    width:350px;
+    height:350px;
+
+    background:#06b6d4;
+
+    left:30%;
+    bottom:-150px;
+
+}
+
+.four{
+
+    width:260px;
+    height:260px;
+
+    background:#9333ea;
+
+    right:15%;
+    bottom:-100px;
+
+}
+
+@keyframes float{
+
+    from{
+
+        transform:
+        translateY(-20px)
+        translateX(-20px);
+
+    }
+
+    to{
+
+        transform:
+        translateY(40px)
+        translateX(30px);
+
+    }
+
+}
+
+/* ==========================================
+   NAVBAR
+========================================== */
+
+nav{
+
+    width:100%;
+
+    padding:25px 70px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.logo{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    background:linear-gradient(
+    90deg,
+    #60a5fa,
+    #a855f7,
+    #ec4899);
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+nav ul{
+
+    display:flex;
+
+    gap:35px;
+
+    list-style:none;
+
+}
+
+nav li{
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+nav li:hover{
+
+    color:#60a5fa;
+
+}
+
+/* ==========================================
+   MAIN CONTAINER
+========================================== */
+
+.container{
+
+    width:90%;
+
+    margin:auto;
+
+    min-height:85vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:50px;
+
+    flex-wrap:wrap;
+
+}
+
+/* ==========================================
+   GLASS CARD
+========================================== */
+
+.glass-card{
+
+    width:520px;
+
+    padding:35px;
+
+    border-radius:30px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    border:
+
+    1px solid
+
+    rgba(255,255,255,.15);
+
+    box-shadow:
+
+    0 10px 35px
+
+    rgba(0,0,0,.35);
+
+}
+/* ==========================================
+   LEFT CARD
+========================================== */
+
+h1{
+
+    font-size:42px;
+
+    margin-bottom:10px;
+
+    line-height:1.2;
+
+    background:linear-gradient(
+    90deg,
+    #60a5fa,
+    #a855f7,
+    #ec4899);
+
+    background-clip:text;
+    -webkit-background-clip:text;
+
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+
+}
+
+p{
+
+    color:#cbd5e1;
+
+    margin-bottom:30px;
+
+}
+
+.input-box{
+
+    margin-bottom:22px;
+
+}
+
+.input-box label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#f1f5f9;
+
+}
+
+.input-box i{
+
+    color:#60a5fa;
+
+    margin-right:8px;
+
+}
+
+.input-box input{
+
+    width:100%;
+
+    padding:16px;
+
+    border-radius:15px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:rgba(255,255,255,.05);
+
+    color:white;
+
+    font-size:16px;
+
+    transition:.35s;
+
+}
+
+.input-box input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+.input-box input:focus{
+
+    outline:none;
+
+    border:1px solid #7c3aed;
+
+    box-shadow:
+
+    0 0 20px rgba(124,58,237,.6);
+
+}
+
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+button{
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:18px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:white;
+
+    cursor:pointer;
+
+    background:
+
+    linear-gradient(
+    90deg,
+    #2563eb,
+    #7c3aed,
+    #ec4899);
+
+    transition:.35s;
+
+}
+
+button:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+
+    0 0 35px rgba(124,58,237,.8);
+
+}
+
+button:active{
+
+    transform:scale(.98);
+
+}
+
+
+/* ==========================================
+   RESULT CARD
+========================================== */
+
+.result-card{
+
+    text-align:center;
+
+}
+
+.robot{
+
+    font-size:80px;
+
+    animation:robot 3s infinite;
+
+}
+
+@keyframes robot{
+
+    0%{
+
+        transform:rotate(-5deg);
+
+    }
+
+    50%{
+
+        transform:rotate(5deg);
+
+    }
+
+    100%{
+
+        transform:rotate(-5deg);
+
+    }
+
+}
+
+.result-card h2{
+
+    margin-top:15px;
+
+    font-size:30px;
+
+}
+
+
+/* ==========================================
+   RISK BADGE
+========================================== */
+
+.risk-badge{
+
+    margin:30px auto;
+
+    width:220px;
+
+    padding:15px;
+
+    border-radius:30px;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    background:#1e293b;
+
+    transition:.4s;
+
+}
+
+/* Dynamic Colors */
+
+.low{
+
+    background:#10b981;
+
+    color:white;
+
+}
+
+.medium{
+
+    background:#f59e0b;
+
+    color:white;
+
+}
+
+.high{
+
+    background:#ef4444;
+
+    color:white;
+
+}
+
+
+/* ==========================================
+   PROGRESS BAR
+========================================== */
+
+.progress-area{
+
+    margin-top:20px;
+
+}
+
+.progress{
+
+    width:100%;
+
+    height:18px;
+
+    background:#1e293b;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+}
+
+.progress-fill{
+
+    width:0%;
+
+    height:100%;
+
+    border-radius:50px;
+
+    background:
+
+    linear-gradient(
+    90deg,
+    #06b6d4,
+    #2563eb,
+    #9333ea,
+    #ec4899);
+
+    transition:1s;
+
+}
+
+#confidence{
+
+    margin-top:15px;
+
+    font-size:20px;
+
+}
+
+
+/* ==========================================
+   RECOMMENDATION
+========================================== */
+
+.recommendation{
+
+    margin-top:30px;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.05);
+
+    color:#e2e8f0;
+
+    line-height:1.8;
+
+}
+/* ==========================================
+   STATS CARDS
+========================================== */
+
+.stats{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    margin-top:35px;
+
+}
+
+.mini-card{
+
+    flex:1;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.05);
+
+    text-align:center;
+
+    transition:.35s;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.mini-card:hover{
+
+    transform:translateY(-8px);
+
+    background:rgba(255,255,255,.09);
+
+    box-shadow:0 0 25px rgba(124,58,237,.5);
+
+}
+
+.mini-card h3{
+
+    font-size:24px;
+
+    margin-bottom:8px;
+
+    color:#60a5fa;
+
+}
+
+.mini-card span{
+
+    color:#cbd5e1;
+
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer{
+
+    text-align:center;
+
+    padding:30px;
+
+    color:#94a3b8;
+
+    font-size:15px;
+
+}
+
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#7c3aed;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#111827;
+
+}
+
+
+/* ==========================================
+   HOVER EFFECTS
+========================================== */
+
+.glass-card{
+
+    transition:.4s;
+
+}
+
+.glass-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+    0 0 40px rgba(124,58,237,.35);
+
+}
+
+
+/* ==========================================
+   INPUT NUMBER ARROWS REMOVE
+========================================== */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+
+    -webkit-appearance:none;
+
+    margin:0;
+
+}
+
+input[type=number]{
+
+    appearance:textfield;
+
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:1100px){
+
+.container{
+
+    flex-direction:column;
+
+    padding:40px 20px;
+
+}
+
+.glass-card{
+
+    width:100%;
+
+}
+
+nav{
+
+    flex-direction:column;
+
+    gap:20px;
+
+    padding:30px;
+
+}
+
+nav ul{
+
+    gap:20px;
+
+}
+
+}
+
+
+@media(max-width:700px){
+
+.logo{
+
+    font-size:24px;
+
+}
+
+h1{
+
+    font-size:32px;
+
+}
+
+.result-card h2{
+
+    font-size:26px;
+
+}
+
+.stats{
+
+    flex-direction:column;
+
+}
+
+button{
+
+    font-size:17px;
+
+}
+
+}

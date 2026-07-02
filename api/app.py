@@ -3,12 +3,22 @@ from pathlib import Path
 from api.schemas import ProductInput
 import joblib
 import pandas as pd
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI(
     title="Dark Pattern AI API",
     version="1.0"
 )
 
+    
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # -----------------------------
 # Load ML Model
 # -----------------------------
