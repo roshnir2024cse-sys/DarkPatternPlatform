@@ -5,8 +5,8 @@ import joblib
 import pandas as pd
 from fastapi.middleware.cors import CORSMiddleware
 import sqlite3
-
-
+from database.db import SessionLocal
+from database.models import Prediction
 app = FastAPI(
     title="Dark Pattern AI API",
     version="1.0"
@@ -58,6 +58,7 @@ def home():
 
 @app.post("/predict")
 def predict(product: ProductInput):
+    print("Prediction API Called")
 
     data = pd.DataFrame([{
         "discount_percentage": product.discount_percentage,
@@ -73,64 +74,23 @@ def predict(product: ProductInput):
     risk = encoder.inverse_transform(prediction)[0]
     confidence = float(probability.max() * 100)
 
-    # -------------------------
-    # Save Prediction to SQLite
-    # -------------------------
+    # Save to PostgreSQL
+    db = SessionLocal()
 
-    conn = sqlite3.connect(DB_PATH)
-
-    cursor = conn.cursor()
-
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS predictions (
-
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-
-        discount_percentage REAL,
-        rating REAL,
-        rating_count REAL,
-        actual_price REAL,
-        discounted_price REAL,
-
-        risk_level TEXT,
-        confidence REAL,
-
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
-    )
-    """)
-
-    cursor.execute("""
-    INSERT INTO predictions (
-
-        discount_percentage,
-        rating,
-        rating_count,
-        actual_price,
-        discounted_price,
-        risk_level,
-        confidence
-
+    new_prediction = Prediction(
+        discount_percentage=product.discount_percentage,
+        rating=product.rating,
+        rating_count=product.rating_count,
+        actual_price=product.actual_price,
+        discounted_price=product.discounted_price,
+        risk_level=risk,
+        confidence=round(confidence, 2)
     )
 
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-
-    """, (
-
-        product.discount_percentage,
-        product.rating,
-        product.rating_count,
-        product.actual_price,
-        product.discounted_price,
-
-        risk,
-        round(confidence, 2)
-
-    ))
-
-    conn.commit()
-
-    conn.close()
+    db.add(new_prediction)
+    db.commit()
+    db.refresh(new_prediction)
+    db.close()
 
     return {
         "RiskLevel": risk,
@@ -139,30 +99,30 @@ def predict(product: ProductInput):
 @app.get("/history")
 def get_history():
 
-    conn = sqlite3.connect(DB_PATH)
+    db = SessionLocal()
 
-    conn.row_factory = sqlite3.Row
+    predictions = (
+        db.query(Prediction)
+        .order_by(Prediction.id.desc())
+        .limit(20)
+        .all()
+    )
 
-    cursor = conn.cursor()
+    result = []
 
-    cursor.execute("""
-        SELECT
-            id,
-            discount_percentage,
-            rating,
-            rating_count,
-            actual_price,
-            discounted_price,
-            risk_level,
-            confidence,
-            created_at
-        FROM predictions
-        ORDER BY id DESC
-        LIMIT 20
-    """)
+    for p in predictions:
+        result.append({
+            "id": p.id,
+            "discount_percentage": p.discount_percentage,
+            "rating": p.rating,
+            "rating_count": p.rating_count,
+            "actual_price": p.actual_price,
+            "discounted_price": p.discounted_price,
+            "risk_level": p.risk_level,
+            "confidence": p.confidence,
+            "created_at": p.created_at
+        })
 
-    rows = cursor.fetchall()
+    db.close()
 
-    conn.close()
-
-    return [dict(row) for row in rows]
+    return result

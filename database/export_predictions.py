@@ -1,12 +1,16 @@
-import sqlite3
+from sqlalchemy import create_engine
+from dotenv import load_dotenv
 import pandas as pd
+import os
 
-conn = sqlite3.connect("database/darkpattern.db")
+load_dotenv()
 
-df = pd.read_sql("SELECT * FROM predictions", conn)
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+engine = create_engine(DATABASE_URL)
+
+df = pd.read_sql("SELECT * FROM predictions", engine)
 
 df.to_csv("database/predictions.csv", index=False)
 
-conn.close()
-
-print("✅ predictions.csv created")
+print("✅ predictions.csv created from Supabase")
